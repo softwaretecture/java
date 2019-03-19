@@ -258,3 +258,51 @@ Similar to method overloading, constructor overloading allows to create multiple
 	Pizza myPizza3 = new Pizza(PizzToppings.MUSHROOM, 12);
 
 ```
+
+## Class variables
+
+Similar to method variables that are declared inside a method and are only available within that method scope, classes can have variables as well. Class variables available within the entire class scope. The must be declared outside of the class methods and use `private` or `public` keyword. It is the best practice to make all class variables `private`. 
+
+`private <Data Type> <variable name> = <value>;`
+
+
+```Java
+	// methods are always declared inside a class
+	public class Pizza{
+
+		//class variables are declared inside the class
+		private int pizzaSize;
+
+
+		//declare a constructor that takes a the size of the pizza to bake
+		public Pizza(int size){	
+		
+			//store the given size of pizza to the class variable
+			pizzaSize = size;
+		}
+
+		//declare a void method that bakes a pizza
+		public void Bake(){
+			//use the pizza size stored in the class variable
+			System.out.println("Baking your " + pizzaSize + " inch pizza.");
+		}
+	}
+
+	//use Pizza class by creating an instance first by giving it the size
+	Pizza myPizza = new Pizza(12);
+	
+	//use Bake method of the class instance
+	myPizza.Bake();
+
+```
+
+
+## Class references
+
+
+## ArrayList
+
+
+## Inheritance
+
+
