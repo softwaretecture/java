@@ -50,3 +50,28 @@ Enumerations:
 	MyColors myColors;
 	System.out.println(myColors.GREEN);
 ```
+
+## Methods
+Methods are functions defined inside a class.
+
+**Definition**
+`<public/private> [static] <return Data Type/void> <method name>([Data Type param1, Data Type param2,...]){ .... }`
+
+
+```Java
+	// methods are always declared inside a class
+	public class Pizza{
+
+		//declare a siple void method
+		public void Bake(){
+			System.out.println("Baking your pizza...");
+		}
+	}
+
+	//use Pizza class by creating an instance first
+	Pizza myPizza = new Pizza();
+	
+	//use Bake method of the class instance
+	myPizza.Bake();
+
+```
