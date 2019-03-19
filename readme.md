@@ -51,6 +51,8 @@ Enumerations:
 	System.out.println(myColors.GREEN);
 ```
 
+
+
 ## Class Methods
 Methods are functions defined inside a class.
 
@@ -144,7 +146,7 @@ To use a `static` method, you don't need to create an istance of the class where
 
 ## Class Constructors
 Class constructors are special methods that are declared inside a class and get invoked automatically when your first create an instance of a class.
-***NOTE: The code inside a constuctore executes only once, when you first create a class instance. You cannot call a constructore after the instace has been created.***
+***NOTE: The code inside a constructor executes only once, when you first create a class instance. You cannot call a constructor after the instance has been created.***
 Constructors are always named the same way as the class name. They cannot return anything or use void.
 
 **Definition**
@@ -174,5 +176,85 @@ Constructors are always named the same way as the class name. They cannot return
 	//use Pizza class by creating an instance first
 	//because it has a constructor that requires the toppings, must provide the toppings
 	Pizza myPizza = new Pizza(PizzToppings.OLIVE);
+
+```
+
+## Method Overloading
+Method overloading provides a way of creating methods with the same name but different input parameter Data Types.
+You can create as many method overloads as needed (same method name), as long as they all have different parameter Data Types.
+
+```Java
+	// methods are always declared inside a class
+	public class Pizza{
+
+		//declare a void method that bakes a pizza
+		public void Bake(){
+			System.out.println("Baking your pizza.");
+		}
+
+
+		//declare a method overload that bakes a pizza for a given number of minutes 
+		public void Bake(int minutes){
+			System.out.println("Baking your pizza for " + minutes);
+		}
+	}
+
+	//use Pizza class by creating an instance first
+	Pizza myPizza = new Pizza();
+	
+	//use Bake method of the class instance
+	myPizza.Bake();
+
+	//use Bake overload method of the class instance and provide a number of minutes to bake the pizza
+	myPizza.Bake(15);
+```
+
+## Constructor Overloading
+Similar to method overloading, constructor overloading allows to create multiple constructors with the same name in the same class as long as the constructor arguments are of different Data Types.
+ 
+
+```Java
+
+	//declare a new enum for pizza toppings
+	public enum PizzToppings{
+		MUSHROOM,
+		OLIVE
+	}
+
+
+	// constructors are always declared inside a class
+	public class Pizza{
+
+		//default constructor
+		public Pizza(){
+			System.out.println("Baking your pizza...");
+		}
+
+		//declare a constructor that takes a type of pizza to create.
+		//the type of pizza is defined by the enum above
+		//NOTE: the PizzToppings is the data type used to define the parameter 'toppings' in the constructor
+		public Pizza(PizzToppings toppings){
+			System.out.println("Baking your " + toppings + " pizza...");
+		}
+
+		//declare a constructor that takes a type of pizza to create
+		//and the size of the pizza
+		public Pizza(PizzToppings toppings, int size){
+			System.out.println("Baking your " + size + " inches " + toppings + " pizza...");
+		}
+	}
+
+	//use Pizza class by creating an instance first
+	//use the default constructor
+	Pizza myPizza1 = new Pizza();
+
+	//use Pizza class by creating an instance first
+	//because it has a constructor that requires the toppings, must provide the toppings
+	Pizza myPizza2 = new Pizza(PizzToppings.OLIVE);
+
+	//use Pizza class by creating an instance first
+	//because it has a constructor that requires the toppings and size, 
+	//must provide the toppings and the size
+	Pizza myPizza3 = new Pizza(PizzToppings.MUSHROOM, 12);
 
 ```
