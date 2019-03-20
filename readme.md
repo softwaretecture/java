@@ -10,7 +10,7 @@ Reserved for Java language only
 `<Data Type> <variable name>;`
 
 Where `<Data Type>` can be:
-1. a primitive type such as `int`,`double`,`byte`, ets 
+1. a primitive type such as `int`,`double`,`byte`, etc 
 2. a complex type such as a `class`, `enum`, `Array`, `ArrayList`, etc
 	1. `String`, `Pizza`, `MyCar`, `ArrayList<>`, etc
 	2. Enumerations `PizzaTopings`, `Color`, etc
@@ -259,9 +259,55 @@ Similar to method overloading, constructor overloading allows to create multiple
 
 ```
 
+## Calling Constructor from a Constructor
+When multiple constructors are used in single class, you can call one constuctor from another to avoid repeting code in every constructor.
+
+Not as clean way
+```Java
+
+	public class Pizza{
+		PizzToppings toppings;
+		int size;
+
+		//set the pizza toppings when the constructor is called;
+		public Pizza(PizzToppings _toppings){
+			toppings = _toppings;
+		}
+
+		//set the pizza toppings and size when the constructor is called;
+		public Pizza(PizzToppings _toppings, int _size){
+			toppings = _toppings; //this line is repeated, not good
+			size = _size;
+		}
+	}
+```
+
+as this calling a constructor from a constructor
+```Java
+
+	public class Pizza{
+		PizzToppings toppings;
+		int size;
+
+		//set the pizza toppings when the constructor is called;
+		public Pizza(PizzToppings _toppings){
+			toppings = _toppings;
+		}
+
+		//set the pizza toppings and size when the constructor is called;
+		public Pizza(PizzToppings _toppings, int _size){
+			//call the first constructor to set the toppings
+			this(_toppings);
+
+			size = _size;
+		}
+	}
+```
+
+
 ## Class variables
 
-Similar to method variables that are declared inside a method and are only available within that method scope, classes can have variables as well. Class variables available within the entire class scope. The must be declared outside of the class methods and use `private` or `public` keyword. It is the best practice to make all class variables `private`. 
+Similar to method variables that are declared inside a method and are only available within that method scope, classes can have variables as well. Class variables available within the entire class scope. The class variables must be declared outside of the class methods and use `private` or `public` keyword. It is the best practice to make all class variables `private`. 
 
 `private <Data Type> <variable name> = <value>;`
 
@@ -297,10 +343,129 @@ Similar to method variables that are declared inside a method and are only avail
 ```
 
 
-## Class references
+## Internal Class References
+
+Within a class, the instance of the class is referred to using the `this` keyword. That is why we refer to constructors within a class as `this(...)`. All non-static methods or class variables can be referred to using the `this.` notation as well.
+
+```Java
+
+	public class Pizza{
+		PizzToppings toppings;
+		int size;
+
+		//set the pizza toppings when the constructor is called;
+		public Pizza(PizzToppings _toppings){
+			//use "this" qualifier
+			this.toppings = _toppings;
+		}
+
+		//set the pizza toppings and size when the constructor is called;
+		public Pizza(PizzToppings _toppings, int _size){
+			//call the first constructor to set the toppings
+			this(_toppings);
+
+			//use "this" qualifier
+			this.size = _size;
+		}
+	}
+```  
+Another example where we actually return the instance of the class from the class itself.
+
+```Java
+
+	public class Pizza{
+		PizzToppings toppings;
+		int size;
+
+		//set the pizza toppings when the constructor is called;
+		public Pizza(PizzToppings _toppings){
+			//use "this" qualifier
+			this.toppings = _toppings;
+		}
+
+		//set the pizza toppings and size when the constructor is called;
+		public Pizza(PizzToppings _toppings, int _size){
+			//call the first constructor to set the toppings
+			this(_toppings);
+
+			//use "this" qualifier
+			this.size = _size;
+		}
+
+		//NOTE: returns the instance of this class
+		public Pizza getPizzaInstance(){
+			return this;
+		}
+	}
+```  
+It whould be used like this:
+
+```Java
+	//use Pizza class to create an instance
+	Pizza myPizza = new Pizza(PizzToppings.OLIVE, 12);
+	
+	//get the instance of Pizza class that we just created
+	//and save it in another variable
+	Pizza myPizzaReference = myPizza.getPizzaInstance();
+
+```
 
 
 ## ArrayList
+
+ArrayLists are classes that allow you to store items of the Data Type that you designate.
+
+For example, if you want to store a list of Pizza classes you would do the following:
+
+```Java
+
+	//create a Pizza class
+	public class Pizza{
+		PizzToppings toppings;
+		int size;
+
+		//set the pizza toppings when the constructor is called;
+		public Pizza(PizzToppings _toppings){
+			this.toppings = _toppings;
+		}
+
+		//set the pizza toppings and size when the constructor is called;
+		public Pizza(PizzToppings _toppings, int _size){
+			//call the first constructor to set the toppings
+			this(_toppings);
+			this.size = _size;
+		}
+
+		public PizzToppings getPizzaType(){
+			return this.toppings;
+		}
+	}
+
+	//in Main.java
+
+	//use Pizza class to create an instance
+	Pizza myPizza1 = new Pizza(PizzToppings.OLIVE, 12);
+	Pizza myPizza2 = new Pizza(PizzToppings.MUSHROOM, 10);
+
+	//create an instance of an array list
+	ArrayList<Pizza> pizzas = new ArrayList<Pizza>();
+
+	//add pizza instances to it
+	pizzas.add(myPizza1);
+	pizzas.add(myPizza2);
+
+	
+	//call method to print all pizzas in the list
+	showBakingPizzas(pizzas)
+
+
+	private static void showBakingPizzas( ArrayList<Pizza> pizzas){
+		for(Pizza pizza : pizzas){
+			System.out.println("Baking pizza " + pizza.getPizzaType());
+		}
+	}
+
+```
 
 
 ## Inheritance
