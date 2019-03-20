@@ -469,5 +469,60 @@ For example, if you want to store a list of Pizza classes you would do the follo
 
 
 ## Inheritance
+Inheritance allows one class to "assume" or "inherit" all of functionality of another class.
+For example `class` Animal may have a method `eat()`. A `class` Dog has a method `bark()` and a `class` Bird has a method `fly()`.
+Both birds and dogs can eat but only a dog can bark and only a bird can fly. To avoid repeating the code for method `eat()` in both Dog and Bird, we can use inheritance to include all of the functionality from the class Animal using a special `extends` keyword.
 
+```Java
+
+	//create a class Animal with method eat()
+	public class Animal {
+		
+		public void eat(){
+			System.out.println("Eating..");
+		}
+	}
+
+	//create a class Dog with method bark() and inherit from the Animal class
+	public class Dog extends Animal {
+		
+		public void bark(){
+			System.out.println("Barking..");
+		}
+	}
+
+
+	//create a class Bird with method fly() and inherit from the Animal class
+	public class Bird extends Animal {
+		
+		public void fly(){
+			System.out.println("Flying..");
+		}
+	}
+
+
+	//in Main.java
+
+	//create an instance of the Dog class
+	Dog dog = new Dog();
+	//use the method from the Dog class
+	dog.bark();
+	//use the method from the inherited class Animal
+	dog.eat();
+
+
+	//create an instance of the Bird class
+	Bird bird = new Bird();
+	//use the method from the Bird class
+	bird.fly();
+	//use the method from the inherited class Animal
+	bird.eat();
+
+```
+
+## Interfaces
+
+## Static Variables
+
+## Abstract Classes
 
